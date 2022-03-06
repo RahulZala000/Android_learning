@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         viewmodel=ViewModelProvider(this,).get(DataViewModel::class.java)
 
         viewmodel.str.observe(this, Observer {
