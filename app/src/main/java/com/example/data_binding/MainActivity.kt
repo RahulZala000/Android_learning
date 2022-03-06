@@ -2,48 +2,31 @@ package com.example.data_binding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.service.autofill.OnClickAction
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
 import com.example.data_binding.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), LifecycleObserver {
+class MainActivity : AppCompatActivity(),View.OnClickListener {
 
     lateinit var binding: ActivityMainBinding
-
+    lateinit var viewmodel:DataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lifecycle.addObserver(Observer())
-        Log.d("@create","create")
 
+        viewmodel=ViewModelProvider(this).get(DataViewModel::class.java)
+        binding.data.text=viewmodel.counter.toString()
+        binding.add.setOnClickListener(this)
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("@pause","pause")
+    override fun onClick(p0: View?) {
+        viewmodel.Increment()
+        binding.data.text=viewmodel.counter.toString()
     }
-
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("@resume","resume")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("@stop","stop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("@destroy","destroy")
-    }
-
 }
