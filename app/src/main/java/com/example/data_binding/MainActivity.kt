@@ -2,30 +2,35 @@ package com.example.data_binding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.data_binding.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(),View.OnClickListener {
+
+class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var viewmodel:DataViewModel
+    lateinit var viewModel:DataViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding= DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        viewmodel=ViewModelProvider(this,).get(DataViewModel::class.java)
-
-        viewmodel.live.observe(this, Observer {
+        viewModel=ViewModelProvider(this).get(DataViewModel::class.java)
+        var user=User("Rahul")
+        binding.user=user
+        viewModel.str.observe(this, Observer {
             binding.data.text=it
         })
-        binding.add.setOnClickListener(this)
+
+        binding.add.setOnClickListener {
+            viewModel.update()
+        }
+
+
+
     }
 
-    override fun onClick(p0: View?) {
-            viewmodel.update()
-    }
 }

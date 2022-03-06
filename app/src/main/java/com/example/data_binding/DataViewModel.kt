@@ -4,12 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DataViewModel() :ViewModel() {
+class DataViewModel() : ViewModel() {
 
-    var str=MutableLiveData<String>("this first")
-
-    var live:LiveData<String> = str
-
+    var str= MutableLiveData<String>()
 
     fun update()
     {

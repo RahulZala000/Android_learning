@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
-    android:gravity="center"
-    android:orientation="vertical"
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<TextView
-    android:id="@+id/data"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:layout_gravity="center"
-    android:text="hyy"
-    tools:ignore="MissingConstraints" />
+    <data>
+        <variable
+            name="User"
+            type="com.example.data_binding.User" />
+    </data>
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:text="+"
-        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edit"
+            android:text="@={}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="@{User.name}"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:text="+"
+            android:layout_height="wrap_content" />
 
 
-</LinearLayout>
+    </LinearLayout>
+</layout>
