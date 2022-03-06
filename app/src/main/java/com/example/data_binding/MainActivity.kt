@@ -3,6 +3,7 @@ package com.example.data_binding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.data_binding.databinding.ActivityMainBinding
 
@@ -17,13 +18,15 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
         setContentView(binding.root)
 
 
-        viewmodel=ViewModelProvider(this,DataFactory(10)).get(DataViewModel::class.java)
-        binding.data.text=viewmodel.counter.toString()
+        viewmodel=ViewModelProvider(this,).get(DataViewModel::class.java)
+
+        viewmodel.str.observe(this, Observer {
+            binding.data.text=it
+        })
         binding.add.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
-        viewmodel.Increment()
-        binding.data.text=viewmodel.counter.toString()
+            viewmodel.update()
     }
 }

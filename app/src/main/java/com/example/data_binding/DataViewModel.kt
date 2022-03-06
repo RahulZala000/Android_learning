@@ -1,12 +1,14 @@
 package com.example.data_binding
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DataViewModel(i: Int) :ViewModel() {
-    var counter:Int= i as Int
+class DataViewModel() :ViewModel() {
 
-    fun Increment()
+    var str=MutableLiveData<String>("this first")
+
+    fun update()
     {
-        counter++
+        str.value="second"
     }
 }
