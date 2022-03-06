@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
 
         viewmodel=ViewModelProvider(this,).get(DataViewModel::class.java)
 
-        viewmodel.str.observe(this, Observer {
+        viewmodel.live.observe(this, Observer {
             binding.data.text=it
         })
         binding.add.setOnClickListener(this)
